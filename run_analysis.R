@@ -1,19 +1,19 @@
 ## Assignment: Getting and Cleaning Data Course Project
 ## loading necesarylibraries amd initializations
 library(dplyr)
-workingDirectoryPath<-"~/Desktop/R_WD/Curso3/Week 4/Getting and Cleaning Data - Project/UCI HAR Dataset"
+workingDirectoryPath<-"./UCI HAR Dataset"
 
 ## Read data: test and train
-y_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/y_test.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
-X_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/X_test.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
-subject_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/subject_test.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
+y_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/y_test.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
+X_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/X_test.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
+subject_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/subject_test.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
 
-y_train <- tbl_df(read.table(file.path(workingDirectoryPath,"train/y_train.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
-X_train <- tbl_df(read.table(file.path(workingDirectoryPath,"train/X_train.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
-subject_train <- tbl_df(read.table(file.path(workingDirectoryPath,"train/subject_train.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
+y_train <- tbl_df(read.table(file.path(workingDirectoryPath,"train/y_train.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
+X_train <- tbl_df(read.table(file.path(workingDirectoryPath,"train/X_train.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
+subject_train <- tbl_df(read.table(file.path(workingDirectoryPath,"train/subject_train.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
 
-features <- tbl_df(read.table(file.path(workingDirectoryPath,"features.txt"), quote="\"", comment.char="", stringsAsFactors=FALSE))
-activity_labels <- tbl_df(read.table(file.path(workingDirectoryPath,"activity_labels.txt"), quote="\"", comment.char="", col.names = c("id","activity")))
+features <- tbl_df(read.table(file.path(workingDirectoryPath,"features.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
+activity_labels <- tbl_df(read.table(file.path(workingDirectoryPath,"activity_labels.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", col.names = c("id","activity")))
 
 #### Prepare each dataset before merging 
 X_test<- mutate(X_test, set = "test")                           ## Adding column with set value ("test")
@@ -72,3 +72,6 @@ reqData2 <- group_by(reqData1,activity,subject)
 sumaryReqData2 <- summarise(reqData2,mean(tbodyacc_mean_x:fbodybodygyrojerkmag_meanfreq,na.rm = TRUE))
 
 
+######### WRITING DATASETS TO FILES
+write.csv(reqData1,file = "required_data_1.csv")
+write.csv(reqData2,file = "required_data_2.csv")
