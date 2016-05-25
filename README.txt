@@ -14,6 +14,8 @@ The dataset includes the following files:
 =========================================
 - 'README.txt'
 - 'run_analysis.R'
+- 'required_data_1.csv'
+- 'required_data_2.csv'
 
 Original files in 'UCI HAR Dataset' Folder
 -----------------------------------------
