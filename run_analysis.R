@@ -1,7 +1,7 @@
 ## Assignment: Getting and Cleaning Data Course Project
 ## loading necesarylibraries amd initializations
 library(dplyr)
-workingDirectoryPath<-"./UCI HAR Dataset"
+workingDirectoryPath <- "./UCI HAR Dataset"
 
 ## Read data: test and train
 y_test <- tbl_df(read.table(file.path(workingDirectoryPath,"test/y_test.txt",fsep = .Platform$file.sep), quote="\"", comment.char="", stringsAsFactors=FALSE))
